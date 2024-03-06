@@ -23,16 +23,16 @@ void minMax(int arr[][MAX_COL],int r, int c){
     int max = arr[0][0];
     for(int i=0;i<r;i++){
         for(int j=0;j<c;j++){
-            if(arr[i][j]<=min){
+            if(arr[i][j]<min){
                 min =arr[i][j];
             }
-            if(arr[i][j]>=max){
+            if(arr[i][j]>max){
                 max =arr[i][j];
             }
         }
     }
-    cout << "Gia tri nho nhat la: " << min << endl;
-    cout << "Gia tri lon nhat la: " << max << endl;
+    cout << "Gia tri nho nhat  la: " << min << endl;
+    cout << "Gia tri lon nhat  la: " << max << endl;
     for(int i=0;i<r;i++){
         for(int j=0;j<c;j++){
             if(arr[i][j]==min){
