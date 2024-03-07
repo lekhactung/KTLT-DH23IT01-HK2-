@@ -66,6 +66,9 @@ int main(){
 	if (timX(arr, r, c,x)==true ) {
 		cout << x << " co ton tai!"<<endl;
 	}
+	else {
+		cout << x << " khong ton tai!" << endl;
+	}
 	system("pause");
 	return 0;
 }
