@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 int s1 (int n){
     if(n==0){
@@ -99,12 +100,52 @@ int tongle(int n){
     }
 }
 //BAI8
-
-
-
+int decimalToBinary(int n){
+    long b;
+    if(n<2){
+        return n;
+    } else {
+        b = n%2;
+        return decimalToBinary(n/2)*10+b;
+    }
+}
+//BAI9
+int binaryToDecimal(int n,int i=0){\
+    int dec;
+    if(n==0){
+        return 0;
+    }  else {
+        int temp = n%10;
+        dec = temp  * pow(2,i) + binaryToDecimal(n/10,i+1);   
+        return dec;
+    }
+}
+//BAI10
+int UCLN(int a,int b){
+    if(b==0){
+        return a;
+    } else {
+        int d = a%b;
+        a=b;
+        b=d;
+        return UCLN(a,b);
+    }
+}
+//BAI11 
+int sumArr(int arr[],int n){
+    if(n<0){
+        return 0 ;
+    } else {
+        return  arr[n] + sumArr(arr,n-1);
+    }
+}
 int main(){
-    int n =1234;
-    int rev;
-    cout <<tongle(n);
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    cout << sumArr(arr,n);
     return 0;
 }
