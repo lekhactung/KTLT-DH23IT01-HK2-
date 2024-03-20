@@ -133,19 +133,52 @@ int UCLN(int a,int b){
 }
 //BAI11 
 int sumArr(int arr[],int n){
-    if(n<0){
+    if(n==0){
         return 0 ;
     } else {
-        return  arr[n] + sumArr(arr,n-1);
+        return  arr[n-1] + sumArr(arr,n-1);
     }
 }
+//BAI12
+int minArr(int arr[],int n){
+    if(n==0){
+        return 0;
+    } else if(n==1){
+        return arr[0];
+    } else {
+        if(arr[n-1] < minArr(arr,n-1)){
+            return arr[n-1];
+        }
+        else {
+            return minArr(arr,n-1);
+        }
+    }
+        
+}
+//BAI13
+int pascalRec(int row , int col){
+    if(col==0 || col == row){
+        return 1;
+    } else { 
+        return pascalRec(row-1,col-1) + pascalRec(row-1,col); 
+    }
+}
+void printPacal (int n){
+    for(int i=0;i<n;i++){
+        for (int j=0;j<=i;j++){
+            cout << pascalRec(i,j) << " ";
+        }
+        cout << endl;
+    }
+}
+
+
+
 int main(){
     int n;
     cin >> n;
-    int arr[n];
-    for(int i=0;i<n;i++){
-        cin >> arr[i];
-    }
-    cout << sumArr(arr,n);
-    return 0;
+    printPacal(n);
+
+
+   return 0;
 }

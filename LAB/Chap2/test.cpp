@@ -1,21 +1,30 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
-int binaryToDecimal(int binary, int index = 0) {
-    if (binary == 0) 
-        return 0;
-    
-    int digit = binary % 10;
-    int decimal = digit * pow(2, index) + binaryToDecimal(binary / 10, index + 1);
-    
-    return decimal;
+// Hàm đệ quy tính giá trị của dòng row và cột col trong tam giác Pascal
+int pascal(int row, int col) {
+    if (col == 0 || col == row)
+        return 1;
+    else
+        return pascal(row - 1, col - 1) + pascal(row - 1, col);
+}
+
+// Hàm đệ quy in ra tam giác Pascal
+void printPascal(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            cout << pascal(i, j) << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main() {
-    int binaryNumber =111;
+    int numRows;
+    cout << "Nhập số hàng của tam giác Pascal: ";
+    cin >> numRows;
 
-    cout<< binaryToDecimal(binaryNumber) << endl;
+    printPascal(numRows);
 
     return 0;
 }
