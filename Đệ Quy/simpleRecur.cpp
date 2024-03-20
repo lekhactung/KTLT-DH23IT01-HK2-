@@ -135,7 +135,7 @@ int minArr(int arr[],int n){
     } else if(n==1){
         return arr[0];
     } else {   
-        if(arr[n-1]>minArr(arr,n-1)){
+        if(arr[n-1]<minArr(arr,n-1)){
             return arr[n-1];
         } else {
             return minArr(arr,n-1);
@@ -144,7 +144,13 @@ int minArr(int arr[],int n){
 }
 
 int main(){
-    cout << sumSQR(10);
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    cout << minArr(arr,n);
 
     return 0;
 }
