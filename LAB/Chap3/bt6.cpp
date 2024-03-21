@@ -30,6 +30,7 @@ int main(){
     input(arr,n);
     reverse(arr,n);
     output(arr,n);
-
+    delete[] arr;
+    arr = nullptr;
     return 0;
 }
