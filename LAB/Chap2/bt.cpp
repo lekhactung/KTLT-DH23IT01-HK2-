@@ -173,11 +173,10 @@ void printPacal (int n){
 }
 
 
-
 int main(){
     int n;
     cin >> n;
-    printPacal(n);
+    cout << fibo (n);
 
 
    return 0;
