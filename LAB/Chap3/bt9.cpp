@@ -41,6 +41,16 @@ int sumSNT(int **arr,int r,int c){
     return sum;
 }
 
+void output_snt(int **arr,int r,int c){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            if(snt(arr[i][j])){
+                cout << arr[i][j] << " " << endl;
+            }
+        }
+    }
+}
+
 int main(){
     int r,c;
     cout << "Nhap chieu dai va chieu rong cua ma tran: ";
@@ -51,6 +61,7 @@ int main(){
         arr[i] = new int [c];
     }
     input(arr,r,c);
+    output_snt(arr,r,c);
     cout << sumSNT(arr,r,c);
 
     for(int i=0;i<r;i++){
