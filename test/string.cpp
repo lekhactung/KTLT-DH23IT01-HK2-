@@ -3,22 +3,19 @@
 
 using namespace std;
 
-// Hàm đếm số lượng từ trong chuỗi
-int demSoTu(const char chuoi[]) {
-    int soTu = 0;
-    bool dangTrongTu = false; // Biến để kiểm tra xem đang ở trong một từ hay không
+// Hàm kiểm tra xem một chuỗi có phải là chuỗi palindrome hay không
+bool kiemTraPalindrome(const char chuoi[]) {
+    int doDai = strlen(chuoi);
 
-    for (int i = 0; chuoi[i] != '\0'; i++) {
-        if (!isspace(chuoi[i]) && !dangTrongTu) {
-            soTu++;
-            dangTrongTu = true;
-        }
-        else if (isspace(chuoi[i])) {
-            dangTrongTu = false;
+    // Duyệt qua từng ký tự của chuỗi, so sánh ký tự đầu và cuối, ký tự thứ hai và ký tự cuối - 1, và cứ tiếp tục như vậy
+    for (int i = 0; i < doDai / 2; i++) {
+        if (chuoi[i] != chuoi[doDai - i - 1]) {
+            // Nếu có bất kỳ sự khác biệt nào giữa các ký tự tương ứng, chuỗi không phải là palindrome
+            return false;
         }
     }
-
-    return soTu;
+    // Nếu không có sự khác biệt nào, chuỗi là palindrome
+    return true;
 }
 
 int main() {
@@ -28,9 +25,12 @@ int main() {
     cout << "Nhap vao chuoi: ";
     cin.getline(chuoi, MAX_LENGTH);
 
-    // Gọi hàm demSoTu và in kết quả
-    int ket_qua = demSoTu(chuoi);
-    cout << "So luong tu trong chuoi: " << ket_qua << endl;
+    // Gọi hàm kiemTraPalindrome và in kết quả
+    if (kiemTraPalindrome(chuoi)) {
+        cout << "Chuoi la palindrome" << endl;
+    } else {
+        cout << "Chuoi khong la palindrome" << endl;
+    }
 
     return 0;
 }
