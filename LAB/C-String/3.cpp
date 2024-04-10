@@ -85,8 +85,19 @@ void lowercase(char a[]){
     }
 }
 
-void upper_1st_letter(char a[]){
-    
+void upper1stchar(char a []){
+    bool is1stchar = true;
+    for(int i=0;i<strlen(a);i++){
+        if(is1stchar && !isspace(a[i])){
+            a[i]=toupper(a[i]);
+            is1stchar=false;
+        } else if(isspace(a[i])){
+            is1stchar=true;
+        }
+    }
+    for(int i=0;i<strlen(a);i++){
+        cout << a[i];
+    }
 }
 
 int count(char a[]){
@@ -107,6 +118,6 @@ const int MAX_LENGTH =100;
 int main(){
     char a[MAX_LENGTH];
     cin.get(a,MAX_LENGTH);
-    cout << count(a);
+    upper1stchar(a);
     return 0;
 }
