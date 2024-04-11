@@ -16,9 +16,9 @@ int main(){
     char a[MAX_LENGTH];
     cin.get(a,MAX_LENGTH);
     if(palindrome(a)){
-        cout << "yes";
+        cout << "is palindrome";
     } else {
-        cout << "no";
+        cout << "is not palindrome";
     }
     return 0;
 }
