@@ -3,39 +3,60 @@
 
 using namespace std;
 
-int main() {
-    const int MAX_LENGTH = 11; // 10 ký tự password + ký tự kết thúc chuỗi ('\0')
-    char password[MAX_LENGTH];
-
-    bool daDangNhap = false;
-    int soLanNhapLai = 3; // Số lần nhập lại tối đa
-
-    while (soLanNhapLai > 0 && !daDangNhap) {
-        // Nhập password từ người dùng
-        cout << "Nhap password (" << MAX_LENGTH - 1 << " ky tu): ";
-        cin.getline(password, MAX_LENGTH);
-
-        // Hiển thị password dưới dạng ký tự "X"
-        cout << "Password: ";
-        for (int i = 0; i < strlen(password); i++) {
-            cout << "X";
-        }
-        cout << endl;
-
-        // Kiểm tra password có đúng không
-        if (strcmp(password, "SinhVienCQ") == 0) {
-            cout << "Dang nhap thanh cong!" << endl;
-            daDangNhap = true;
-        } else {
-            cout << "Password khong chinh xac. Vui long nhap lai." << endl;
-            soLanNhapLai--;
-            if (soLanNhapLai > 0) {
-                cout << "Ban con " << soLanNhapLai << " lan nhap lai." << endl;
-            } else {
-                cout << "Da het lan nhap lai. Chuc may man lan sau!" << endl;
-            }
-        }
+// Hàm chuyển đổi số tháng thành tên tháng
+string chuyenDoiTenThang(int thang) {
+    switch (thang) {
+        case 1:
+            return "January";
+        case 2:
+            return "February";
+        case 3:
+            return "March";
+        case 4:
+            return "April";
+        case 5:
+            return "May";
+        case 6:
+            return "June";
+        case 7:
+            return "July";
+        case 8:
+            return "August";
+        case 9:
+            return "September";
+        case 10:
+            return "October";
+        case 11:
+            return "November";
+        case 12:
+            return "December";
+        default:
+            return "";
     }
+}
+
+int main() {
+    const int MAX_LENGTH = 100;
+    char ngayThangNam[MAX_LENGTH];
+
+    cout << "Nhap ngay thang nam theo dinh dang 'mm/dd/yy': ";
+    cin.getline(ngayThangNam, MAX_LENGTH);
+
+    // Phân tích chuỗi đầu vào để lấy ra tháng, ngày và năm
+    char* thang_str = strtok(ngayThangNam, "/");
+    char* ngay_str = strtok(NULL, "/");
+    char* nam_str = strtok(NULL, "/");
+
+    // Chuyển đổi các chuỗi số thành các giá trị nguyên
+    int thang = atoi(thang_str);
+    int ngay = atoi(ngay_str);
+    int nam = atoi(nam_str);
+
+    // Chuyển đổi số tháng thành tên tháng
+    string tenThang = chuyenDoiTenThang(thang);
+
+    // In ra kết quả theo định dạng "Tháng Ngày, Năm"
+    cout << "Ket qua: " << tenThang << " " << ngay << ", 19" << nam << endl;
 
     return 0;
 }
