@@ -110,7 +110,7 @@ int decimalToBinary(int n){
     }
 }
 //BAI9
-int binaryToDecimal(int n,int i=0){\
+int binaryToDecimal(int n,int i=0){
     int dec;
     if(n==0){
         return 0;

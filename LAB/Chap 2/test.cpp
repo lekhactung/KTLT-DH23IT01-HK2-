@@ -19,12 +19,21 @@ void printPascal(int n) {
     }
 }
 
-int main() {
-    int numRows;
-    cout << "Nhập số hàng của tam giác Pascal: ";
-    cin >> numRows;
+long bin_to_dec(long long n){
+    if (n == 0)
+        return 0;
+    return bin_to_dec(n/10)*2 + n%10;
+}
 
-    printPascal(numRows);
+int main() {
+    // int numRows;
+    // cout << "Nhập số hàng của tam giác Pascal: ";
+    // cin >> numRows;
+
+    long long n ;
+    cin >> n ;
+
+    cout << bin_to_dec(n);
 
     return 0;
 }
