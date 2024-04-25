@@ -2,18 +2,29 @@
 using namespace std;
 
 int main(){
-    int n = 6;
-    int sum =1;
-    for(int i=2;i<n;i++){
-        if(n % i == 0 ){
-            sum += i;
-        }
+    int n; cin >> n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
     }
-    if(sum == n ){
-        cout << n << " la so hoan hao";
-    } else {
-        cout << n << " ko phai so hoan hao";
+
+    for(int i=0;i<n;i++){
+        cout << arr[i] << " ";
     }
+    cout << endl << "///" << endl;
+    int pos; cout << "pos" <<endl;
+    cin >> pos;
+    for(int i=pos-1;i<=n;i++){
+        arr[i]=arr[i+1];
+    }
+    n--;
+
+    cout <<"////" << endl;
+
+    for(int i=0;i<n;i++){
+        cout << arr[i] << " ";
+    }
+
 
     return 0;
 }
