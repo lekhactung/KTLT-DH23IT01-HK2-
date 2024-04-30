@@ -12,7 +12,7 @@ void free (int *&arr, int n){
     arr = nullptr;
 }
 
-void intput (int *&arr,int n){
+void input (int *&arr,int n){
     newInt(arr,n);
     for(int i =0 ;i<n;i++){
         cin >> arr[i];
@@ -135,9 +135,9 @@ void delArr(int *arr, int &n, int pos ){
     n--;
 }
 
-void sort_tangDan(int *arr, int n){
-    for(int i=0;i<n;i++){
-        for(int j=i+1;j<n;j++){
+void sort_tangDan(int *arr, int start, int end){
+    for(int i=start;i<end;i++){
+        for(int j=i+1;j<end;j++){
             if(arr[i] >= arr[j]){
                 swap(arr[i],arr[j]);
             }
@@ -145,9 +145,9 @@ void sort_tangDan(int *arr, int n){
     }
 }
 
-void sort_giamDan(int *arr, int n){
-    for(int i=0;i<n;i++){
-        for(int j=i+1;j<n;j++){
+void sort_giamDan(int *arr, int start, int end){
+    for(int i=start;i<end;i++){
+        for(int j=i+1;j<end;j++){
             if(arr[i] <= arr[j]){
                 swap(arr[i],arr[j]);
             }
@@ -155,16 +155,98 @@ void sort_giamDan(int *arr, int n){
     }
 }
 
+void half_sort(int *arr, int n){
+    int half = n/2;
+    sort_tangDan(arr,0,n);
+    sort_giamDan(arr,half,n);
+}
 
+int *gopmang (int *a,int n, int *b , int m){
+    if(a != NULL && b != NULL){
+    int *c;
+    newInt(c,n+m);
+        if(a!= NULL){
+            int cnt=0;
+            for(int i=0;i<n;i++) {
+                c[cnt++] = a[i];
+            }
+            for(int i=0;i<m;i++) {
+            c[cnt++] = b[i];
+            }
+       }
+    return c;
+    }
+    return nullptr;
+}  
+
+int *sort_2_mang (int *a,int n, int *b, int m){
+    int *c = gopmang(a,n,b,m);
+    sort_tangDan(c,0,n+m);
+    return c;
+}
+void menu(){
+     cout << "0.Thoat chuong trinh\n"
+        << "1.NHAP MANG\n"
+        << "2.XUAT MANG\n"
+        << "3.DEM SO LUONG PHAN TU LA SO CHINH PHUONG\n"
+        << "4.KIEM TRA SO AM TRONG MANG\n"
+        << "5.KIEM TRA SO DUONG TRONG MANG\n"
+        << "6.KIEM TRA SO NGUYEN TO TRONG MANG\n"
+        << "7.TIM SO CHINH PHUONG DAU TIEN TRONG MANG\n"
+        << "8.TIM SO HOAN THIEN CUOI CUNG TRONG MANG\n"
+        << "9.TIM SO NHO NHAT DAU TIEN TRONG MANG\n"
+        << "10.TIM SO NHO NHAT CUOI CUNG TRONG MANG\n"
+        << "11.XOA 1 PHAN TU TRONG MANG TAI VI TRI BAT KY\n"
+        << "12.SAP XEP MANG GIAM DAN\n"
+        << "13.SAP XEP MANG TANG DAN\n"
+        << "14.SAP XEP NUA DAU MANG TANG VA NUA SAU GIAM DAN\n"
+        << "15.GOP 2 MANG\n"
+        << "16.GOP 2 MANG DA TANG DAN LAI THANH 1 MANG VA CUNG TANG DAN\n";
+}
 int main(){
-    int *arr = NULL;
-    int n;
-    cout << "So phan tu cua mang : ";
-    cin >> n;
-    intput(arr,n);
-    int  pos;
-    output(arr,n);
-    sort_giamDan(arr,n);
-    output(arr,n);
-    return 0;
+    int choice;
+    int n,m;
+    int *a = NULL , *b = NULL;
+    do{
+        menu();
+        cout << "// CHON CHUONG TRINH//" << endl;
+        cin >> choice;
+        system("cls");
+
+        switch (choice)
+        {   
+        case 0:{
+            cout <<"Cam on da su dung chuong trinh! " << endl;
+            break;
+        }
+        case 1:{
+            cout << "Nhap so luong phan tu: "; cin >> n;
+            input(a,n);
+            break;
+        }
+        case 2:{
+            output(a,n);
+            break;
+        }
+        case 3:{
+            cout << "Mang co " << cntSCP(a,n) << " so chinh phuong!" << endl;
+            break;
+        }
+        case 4:{
+            for(int i=0;i<n;i++){
+                if(isSHT(a[i])){
+                    cout << "Mang co chua so hoan thien!" << endl;
+                    break;
+                } else {
+                    cout << "Mang khong chua so hoan thien! " << endl;
+                }
+            }
+        }
+        default:
+            break;
+        }  
+        system("pause");
+    } while(choice !=0);
+
+
 }

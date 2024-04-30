@@ -7,46 +7,40 @@ void menuChoice(){
         << "3. Thong ke \n";
 }
 
-
 struct Xe{
     int id;
     time_t thoiGianVao;
     bool theoThang;
 };  
 
-class baiXe{
-    private : 
-        vector <Xe> danhSachXe;
-        int tienThuDuoc;
-    public :
-        void baixe(){
-            tienThuDuoc =0;
-        }
+struct baiXe{
+        vector<Xe> danhSachXe;
+        int tienthuduoc =0 ;
         void nhanXeVao(Xe xe){
             danhSachXe.push_back(xe);
         }
-        void xuatXe(int id){
+        void xuatXeRa(int id){
             time_t thoiGianRa = time(0);
             for(int i=0;i<danhSachXe.size();i++){
-                if(danhSachXe[i].id == id){
+                if(danhSachXe[i].id==id){
                     if(!danhSachXe[i].theoThang){
-                        double thoiGian = thoiGianRa - danhSachXe[i].thoiGianVao;
                         int tien =0;
-                        if(thoiGian <=60){
+                        double thoigian = thoiGianRa - danhSachXe[i].thoiGianVao;
+                        if(thoigian <= 60){
                             tien = 50000;
-                        } else {
-                            tien = 50000 + ((thoiGian - 60)/ 30 * 20000);
                         }
-                        tienThuDuoc += tien; 
+                        else {
+                            tien = 50000 + ((thoigian-60)/30) * 20000;
+                        }
+                        tienthuduoc += tien;
                     }
                     danhSachXe.erase(danhSachXe.begin()+i);
-                    break;
                 }
             }
         }
-        void thongKe(){
-            cout << "So luong xe dang co trong bai: " <<danhSachXe.size() << endl;
-            cout << "So tien da thu duoc: " << tienThuDuoc;
+        void thongke (){
+            cout << "So xe con lai trong bai: " << danhSachXe.size() << endl;
+            cout << "so tien da thu: " << tienthuduoc;
         }
 };
 
@@ -54,7 +48,7 @@ int main(){
     baiXe baixe;
     Xe xe1 = {1,time(0),true};
     Xe xe2 = {2,time(0),false};
-    Xe xe3 = {3,time(0),false};
+    Xe xe3 = {3,time(0),true};
     Xe xe4 = {4,time(0),false};
 
     baixe.nhanXeVao(xe1);
@@ -62,13 +56,10 @@ int main(){
     baixe.nhanXeVao(xe3);
     baixe.nhanXeVao(xe4);
 
-
-    baixe.xuatXe(2);
-
-    baixe.thongKe();
+    baixe.xuatXeRa(2);
+    baixe.xuatXeRa(4);
 
 
-
-
+    baixe.thongke();
     return 0;
 }
