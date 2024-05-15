@@ -1,30 +1,24 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+#include <math.h>
 
 int main(){
-    int n; cin >> n;
-    int arr[n];
-    for(int i=0;i<n;i++){
-        cin >> arr[i];
+    int n = 10;
+    int a[n] = {1, 3, 4, 5, 5, 2, 4, 1, 2, 3};
+    int res = 0;
+    for(int i = 0; i < n; i++){
+        //Cần kiểm tra a[i] đã xuất hiện chưa?
+        int check = 1;
+        //Xét các phần tử đứng trước a[i]
+        for(int j = 0; j < i; j++){
+            if(a[i] == a[j]){
+                check = 0; // nếu có bất kì phần tử nào trước a[i] = a[j] tức là số đó đã xuất hiện -> trả về giá trị false
+                break; // và dừng vòng lặp j lại
+            }
+        }
+        if(check == 1){ // nếu check = true -> số đó chưa từng xuất hiện thì biến đếm res +1;
+            ++res;
+        }
     }
-
-    for(int i=0;i<n;i++){
-        cout << arr[i] << " ";
-    }
-    cout << endl << "///" << endl;
-    int pos; cout << "pos" <<endl;
-    cin >> pos;
-    for(int i=pos-1;i<=n;i++){
-        arr[i]=arr[i+1];
-    }
-    n--;
-
-    cout <<"////" << endl;
-
-    for(int i=0;i<n;i++){
-        cout << arr[i] << " ";
-    }
-
-
+    printf("So luong gia tri khac nhau trong mang : %d\n", res);
     return 0;
 }
