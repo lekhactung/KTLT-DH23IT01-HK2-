@@ -1,24 +1,30 @@
-#include <stdio.h>
-#include <math.h>
+#include <iostream>
 
-int main(){
-    int n = 10;
-    int a[n] = {1, 3, 4, 5, 5, 2, 4, 1, 2, 3};
-    int res = 0;
-    for(int i = 0; i < n; i++){
-        //Cần kiểm tra a[i] đã xuất hiện chưa?
-        int check = 1;
-        //Xét các phần tử đứng trước a[i]
-        for(int j = 0; j < i; j++){
-            if(a[i] == a[j]){
-                check = 0; // nếu có bất kì phần tử nào trước a[i] = a[j] tức là số đó đã xuất hiện -> trả về giá trị false
-                break; // và dừng vòng lặp j lại
-            }
-        }
-        if(check == 1){ // nếu check = true -> số đó chưa từng xuất hiện thì biến đếm res +1;
-            ++res;
+// Hàm đệ quy để sắp xếp mảng bằng Bubble Sort
+void recursiveBubbleSort(int arr[], int n) {
+    // Cơ sở đệ quy: nếu kích thước mảng là 1, mảng đã được sắp xếp
+    if (n == 1)
+        return;
+
+    // Thực hiện một vòng sắp xếp
+    for (int i = 0; i < n - 1; ++i) {
+        if (arr[i] > arr[i + 1]) {
+            std::swap(arr[i], arr[i + 1]);
         }
     }
-    printf("So luong gia tri khac nhau trong mang : %d\n", res);
+
+    // Gọi đệ quy để sắp xếp phần còn lại của mảng
+    recursiveBubbleSort(arr, n - 1);
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, -90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    recursiveBubbleSort(arr, n);
+
+    std::cout << "Sorted array: \n";
+    for (int i = 0; i < n; ++i)
+        std::cout << arr[i] << " ";
     return 0;
 }
