@@ -133,7 +133,7 @@ void n_input(){
 }
 
 
-int main(){
+int main(){ 
     int r,c,n;
     r_c_input(r,c);
     int **a;
