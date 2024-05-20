@@ -1,71 +1,116 @@
 #include <iostream>
+
 using namespace std;
 
-// Hàm kiểm tra số nguyên tố
-bool isPrime(int num) {
-    if (num <= 1) return false;
-    for (int i = 2; i * i <= num; ++i) {
-        if (num % i == 0) return false;
-    }
-    return true;
+const int MAX_SIZE = 10;
+
+
+void r_c_input (int &r,int &c){
+    do{
+        cout <<"Nhap so hang : " << endl; cin >> r;
+        cout << "Nhap so cot :"  << endl; cin >> c;
+        if(r <= 0 || r > MAX_SIZE ){
+            cout << "So dong khong hop le, vui long nhap lai!" << endl;
+        } if (c <=0 || c > MAX_SIZE){
+            cout << "So cot khong hop le, vui long nhap lai!" << endl;
+        }
+    } while ( r <= 0 || r > MAX_SIZE || c <=0 || c > MAX_SIZE);
 }
 
-// Hàm tìm và lưu các số nguyên tố
-int* findAndStorePrimes(int** arr, int rows, int cols, int& primeCount) {
-    const int maxSize = rows * cols; // Kích thước tối đa có thể có
-    int* primeNumbers = new int[maxSize];
-    primeCount = 0;
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            if (isPrime(arr[i][j])) {
-                primeNumbers[primeCount++] = arr[i][j];
-            }
+void input_2dArr (int **a,int &r,int &c){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            a[i][j] = rand() % 9 + 1;
         }
     }
-
-    return primeNumbers;
 }
 
-int main() {
-    // Khởi tạo mảng 2 chiều động
-    const int rows = 3;
-    const int cols = 3;
-    int** arr = new int*[rows];
-    for (int i = 0; i < rows; ++i) {
-        arr[i] = new int[cols];
+void output_2dArr (int **a,int &r,int &c){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cout <<  a[i][j] << " ";
+        }
+        cout << endl;
     }
+}
 
-    // Gán giá trị cho mảng
-    int values[rows][cols] = {
-        {11, 12, 13},
-        {14, 15, 16},
-        {17, 18, 19}
-    };
+int *col_index (int **a,int r,int c,int &tmp){
+    int place;
+    int *b = new int[r*c];
+    cout << "Nhap vi tri cot can in cac phan tu : ";
+    cin >> place;
+     tmp=0;
+    for(int i=0;i<r;i++){
+        b[tmp++]=a[i][place-1];
+    }
+    return b;
+}
 
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            arr[i][j] = values[i][j];
+int *row_index (int **a,int r,int c,int &tmp){
+    int place;
+    int *b = new int[r*c];
+    cout << "Nhap vi tri dong can in cac phan tu : ";
+    cin >> place;
+    tmp =0;
+    for(int i=0;i<c;i++){
+        b[tmp++] = a[place-1][i] ;
+    }
+    return b;
+}
+bool iseven (int n){
+    if(n%2==0){
+        return true;
+    }
+    return false;
+}
+
+int* col_even(int **a,int r,int c,int &tmp){
+    int place;
+    int *b = new int[r*c];
+    cout << "Nhap vi tri cot can in cac phan tu chan : ";
+    cin >> place;
+    tmp=0;
+    for(int i=0;i<r;i++){
+        if(iseven(a[i][place-1])){
+            b[tmp++]=a[i][place-1];
         }
     }
-
-    // Biến đếm số lượng số nguyên tố
-    int primeCount = 0;
-    int* primeNumbers = findAndStorePrimes(arr, rows, cols, primeCount);
-
-    // In ra các số nguyên tố đã tìm được
-    cout << "Cac so nguyen to trong mang la: ";
-    for (int i = 0; i < primeCount; ++i) {
-        cout << primeNumbers[i] << " ";
+    return b;
+}
+int main(){
+    srand(time(NULL));
+    int r, c;
+    r_c_input(r,c);
+    int **a;
+    a = new int *[r];
+    for(int i=0;i<r;i++){
+        a[i] = new int [c];
+    }
+    input_2dArr(a,r,c);
+    output_2dArr(a,r,c);
+    ////////
+    int tmp=0;
+    int *col = col_index(a,r,c,tmp);
+    for(int i=0;i<tmp;i++){
+        cout << col[i] << " ";
     }
     cout << endl;
-
-    // Giải phóng bộ nhớ
-    delete[] primeNumbers;
-    for (int i = 0; i < rows; ++i) {
-        delete[] arr[i];
+    ////////
+    int *row = row_index(a,r,c,tmp);
+    for(int i=0;i<tmp;i++){
+        cout << row[i] << " ";
     }
-    delete[] arr;
-
+    cout << endl;
+    /////////
+    int *coleven = col_even(a,r,c,tmp);
+    for(int i=0;i<tmp;i++){
+        cout << coleven[i] << " ";
+    }
+    cout << endl;
+    //giai phong
+    delete[] a;
+    for (int i = 0; i < r; ++i) {
+        delete[] a[i];
+    }
     return 0;
 }

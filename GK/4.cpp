@@ -83,24 +83,28 @@ int find_1st_odd(int **a,int r,int c){
     return NULL;
 }
 
-void col_index (int **a,int r){
+int *col_index (int **a,int r,int c,int &tmp){
     int place;
+    int *b = new int[r*c];
     cout << "Nhap vi tri cot can in cac phan tu : ";
     cin >> place;
+     tmp=0;
     for(int i=0;i<r;i++){
-        cout << a[i][place-1] << " ";
+        b[tmp++]=a[i][place-1];
     }
-    cout << endl;
+    return b;
 }
 
-void row_index (int **a,int c){
+int *row_index (int **a,int r,int c,int &tmp){
     int place;
+    int *b = new int(r*c);
     cout << "Nhap vi tri dong can in cac phan tu : ";
     cin >> place;
+    tmp =0;
     for(int i=0;i<c;i++){
-        cout << a[place-1][i] << " ";
+        b[tmp++] = a[place-1][i] ;
     }
-    cout << endl;
+    return b;
 }
 bool iseven (int n){
     if(n%2==0){
@@ -109,17 +113,20 @@ bool iseven (int n){
     return false;
 }
 
-void col_even(int **a,int r,int c){
+int* col_even(int **a,int r,int c,int &tmp){
     int place;
+    int *b = new int[r*c];
     cout << "Nhap vi tri cot can in cac phan tu chan : ";
     cin >> place;
-    for(int i=0;i<c;i++){
+    tmp=0;
+    for(int i=0;i<r;i++){
         if(iseven(a[i][place-1])){
-            cout << a[i][place-1]<< " ";
+            b[tmp++]=a[i][place-1];
         }
     }
-    cout << endl;
+    return b;
 }
+
 int main(){
     srand(time(NULL));
     int r, c;
@@ -143,17 +150,33 @@ int main(){
     cout << endl;
     ////////
     cout << "So le dau tien trong mang la: " << find_1st_odd(a,r,c) << endl;
+     ////////
+    int tmp=0;
+    int *col = col_index(a,r,c,tmp);
+    for(int i=0;i<tmp;i++){
+        cout << col[i] << " ";
+    }
+    cout << endl;
     ////////
-    col_index(a,r);
-    ////////
-    row_index(a,c);
-    ///////
-    col_even(a,r,c);
+    int *row = row_index(a,r,c,tmp);
+    for(int i=0;i<tmp;i++){
+        cout << row[i] << " ";
+    }
+    cout << endl;
+    /////////
+    int *coleven = col_even(a,r,c,tmp);
+    for(int i=0;i<tmp;i++){
+        cout << coleven[i] << " ";
+    }
+    cout << endl;
     //giai phong
     delete[] a;
     for (int i = 0; i < r; ++i) {
         delete[] a[i];
     }
+    delete[]col;
+    delete[]row;
+    delete[]coleven;
     delete[] b;
     return 0;
 }
