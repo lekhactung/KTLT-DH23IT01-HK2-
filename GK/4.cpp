@@ -58,13 +58,12 @@ bool isprime(int n){
 }
 
 int *prime (int **a,int r,int c,int &cnt){
-    const int max  = r *c;
-    int *b = new int [max];
+    int *b = new int [r*c];
     cnt=0;
     for(int i=0;i<r;i++){
         for(int j=0;j<c;j++){
-            if(isprime(**(a+i)+j)){
-                b[cnt++] = **(a+i)+j;
+            if(isprime(a[i][j])){
+                b[cnt++] = a[i][j];
             }
         }
     }
