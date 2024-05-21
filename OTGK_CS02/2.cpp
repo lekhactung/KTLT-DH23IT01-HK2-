@@ -22,7 +22,8 @@ void input (int *&arr,int &n){
     } while (n<=0);
     newInt(arr,n);
     for(int i =0 ;i<n;i++){
-        cin >> arr[i];
+        // cin >> arr[i];
+        arr[i] = rand()%50 +1;
     }
 }
 
@@ -213,6 +214,7 @@ void menu(){
 
 }
 int main(){
+    srand(time(NULL));
     int choice;
     int n,m;
     int *a = NULL;

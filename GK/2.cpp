@@ -80,26 +80,115 @@ bool issht(int n){
     } return false;
 }
 
+bool isneg (int n){
+    return n<0;
+}
+
+bool ispos (int n){
+    return !isneg(n);
+}
+
+bool isprime (int n){
+    if ( n<2 ){
+        return false;
+    }
+    for(int i=2;i<n;i++){
+        if(n%i==0){
+            return false;
+        }
+    }
+    return true;
+}
+
+int *f_scp (int *a,int n){
+    for(int i=0;i<n;i++){
+        if(isscp(a[i])){
+            return &a[i];
+        }
+    }
+    return nullptr;
+}
+
+int *l_sht (int *a,int n){
+    for(int i= n-1;i>=0;i++){
+        if(issht(a[i])){
+            return &a[i];
+        }
+    }
+    return nullptr;
+}
+
+void swap (int a,int b){
+    int tmp = a; 
+    a = b;
+    b = tmp;
+}
+
+int *f_min (int *a, int n){
+    int minindex =0;
+    for(int i=1;i<n;i++){
+        if (a[i] < a[minindex]){
+            minindex = i;
+        }
+    }
+    return  &a[minindex];
+}
+
+int *l_min (int *a, int n){
+    int minindex =0;
+    for(int i=1;i<n;i++){
+        if (a[i] <= a[minindex]){
+            minindex = i;
+        }
+    }
+    return  &a[minindex];
+}
+
+void delArr(int *a, int &n){
+    int vt; 
+    cout << "Nhap vi tri cua phan tu can xoa tu 1 -> " << n << " : ";
+    cin >> vt;
+    for(int i=vt;i<n;i++){
+        a[i-1] = a[i];
+    }
+    n--;
+}
+
+void sort_giamdan(int *a, int n){
+    for(int i=0;i<n;i++){
+        for(int j=i;j<n;j++){
+            if(a[j] >= a[i]){
+                int tmp = a[j];
+                a[j] = a[i];
+                a[i]=tmp;
+            }
+        }
+    }
+}
+void sort_tangdan(int *a, int n){
+    for(int i=0;i<n;i++){
+        for(int j=i;j<n;j++){
+            if(a[j] <= a[i]){
+                int tmp = a[j];
+                a[j] = a[i];
+                a[i]=tmp;
+            }
+        }
+    }
+}
 int main(){
     srand(time(NULL));
     int n,choice;
     int *a;
-    do{
-        menu();
-        cout << "//CHON CHUONG TRINH//"; cin >> choice;
-        system("cls");
-
-        switch ()
-        {
-        case /* constant-expression */:
-            /* code */
-            break;
-        
-        default:
-            break;
-        }
-
-    } while(choice !=0);
+    
+    input_1dArr(a,n);
+    output_1dArr(a,n);
+    // cout << f_scp(a,n);
+    // delArr(a,n);
+    sort_giamdan(a,n);
+    output_1dArr(a,n);
+    sort_tangdan(a,n);
+    output_1dArr(a,n);
     free(a);
     return 0;
 }
