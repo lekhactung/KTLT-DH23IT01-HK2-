@@ -118,7 +118,7 @@ int *l_sht (int *a,int n){
     return nullptr;
 }
 
-void swap (int a,int b){
+void swap (int &a,int &b){
     int tmp = a; 
     a = b;
     b = tmp;
@@ -158,9 +158,7 @@ void sort_giamdan(int *a, int n){
     for(int i=0;i<n;i++){
         for(int j=i;j<n;j++){
             if(a[j] >= a[i]){
-                int tmp = a[j];
-                a[j] = a[i];
-                a[i]=tmp;
+                swap(a[i],a[j]);
             }
         }
     }
@@ -169,9 +167,7 @@ void sort_tangdan(int *a, int n){
     for(int i=0;i<n;i++){
         for(int j=i;j<n;j++){
             if(a[j] <= a[i]){
-                int tmp = a[j];
-                a[j] = a[i];
-                a[i]=tmp;
+               swap(a[i],a[j]);
             }
         }
     }

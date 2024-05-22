@@ -19,7 +19,7 @@ int kiemTra(int *arr,int n,int x){
             return i+1; 
         } 
     }
-    return 0;
+    return NULL;
 }
 
 int main(){
