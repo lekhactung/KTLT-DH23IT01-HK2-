@@ -31,8 +31,6 @@ void xuatsv (SinhVien sv){
 struct DSSV{
     SinhVien *sinhvien;
     int soluong;
-
-
 };
 
 void nhapdssv(DSSV &sv){
@@ -52,11 +50,7 @@ void nhapdssv(DSSV &sv){
 
 void xuatdssv(DSSV sv){
     for(int i=0;i<sv.soluong;i++){
-        cout << "////////////////////" << endl;
-        cout  << "MSSV: "<< sv.sinhvien[i].mssv << endl;
-        cout  << "Ho va ten: "<< sv.sinhvien[i].hoten << endl;
-        cout  << "Ma lop: "<< sv.sinhvien[i].malop << endl;
-        cout  << "Diem trung binh: "<< sv.sinhvien[i].diemtb << endl;
+        xuatsv(sv.sinhvien[i]);
     }
 }
 void nhapfiledssv(DSSV sv){
@@ -126,17 +120,29 @@ void capnhatttsv(DSSV &sv){
     int pos;
     cout <<"Nhap thu tu cua sinh vien can sua thong tin :";
     cin >> pos;
-    // ofstream ofs;
-    // ofs.open("bai4.txt",ios::in);
-    // nhapsv(sv.sinhvien[pos]);
-    // if(ofs.is_open()){   
-    //     ofs << sv.sinhvien[pos].mssv << "#" << sv.sinhvien[pos].hoten << "#" << sv.sinhvien[pos].malop <<"#"<<sv.sinhvien[pos].diemtb << endl;
-    // } else {    
-    //     cout << "Khong mo duoc file";
-    // }
-    // ofs.close();
     nhapsv(sv.sinhvien[pos-1]);
 }
+
+void xoassv(DSSV &sv){
+    int pos;
+    cout <<"Nhap thu tu cua sinh vien can xoa: ";
+    cin >> pos;
+    sv.soluong--;
+    for(int i=pos-1;i<sv.soluong;i++){
+        sv.sinhvien[i] = sv.sinhvien[i+1];
+    }
+}
+
+// void themsv(DSSV &sv){
+//     int n;
+//     cout <<"Nhap so luong sinh vien can them : ";
+//     cin >>n;
+//     int i=sv.soluong;
+//     sv.soluong+=n;
+//     for(int i;i<sv.soluong;i++){
+//         nhapsv(sv.sinhvien[i]);
+//     }
+// }
 
 int main(){
     system("cls");
@@ -145,12 +151,15 @@ int main(){
     // nhapdssv(dssv);
     // nhapfiledssv(dssv);
     docfiledssv(dssv);
-    // xuatdssv(dssv);
+    xuatdssv(dssv);
     //cout << "Co " << demmssv(dssv) << " sinh vien thuoc lop CS20" << endl;
     //cout << "Co " << demdiemtb(dssv) << " sinh vien co diem trung binh >=8" << endl;
-    sapxep(dssv);
+    // sapxep(dssv);
     // xuatdssv(dssv);
-    capnhatttsv(dssv);
-    nhapfiledssv(dssv);
+    // capnhatttsv(dssv);
+    // xoassv(dssv);
+    // nhapfiledssv(dssv);
+    // themsv(dssv);
+    // nhapfiledssv(dssv);
     return 0;
 }

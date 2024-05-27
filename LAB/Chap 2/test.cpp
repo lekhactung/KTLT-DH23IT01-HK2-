@@ -25,15 +25,40 @@ long bin_to_dec(long long n){
     return bin_to_dec(n/10)*2 + n%10;
 }
 
+int demle(int a[],int n, int cnt){
+    if(n==0){
+        return cnt;
+    } else{
+        if(a[n-1]%2!=0){
+            return demle(a,n-1,cnt++);
+        } else{
+            return demle(a,n-1,cnt);
+        }
+    }
+}
+
+
+
 int main() {
     // int numRows;
     // cout << "Nhập số hàng của tam giác Pascal: ";
     // cin >> numRows;
 
-    long long n ;
-    cin >> n ;
+    // long long n ;
+    // cin >> n ;
 
-    cout << bin_to_dec(n);
+    // cout << bin_to_dec(n);
+
+    int a[10];
+    for(int i=0;i<10;i++){
+        a[i]=rand()%10 +1;
+    }
+     for(int i=0;i<10;i++){
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    cout <<demle(a,10,0);
+
 
     return 0;
 }
