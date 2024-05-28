@@ -1,86 +1,94 @@
 #include <iostream>
-#include <fstream>
+#include <string>
+#include <string.h>
+#include<fstream>
+#include <time.h>
 using namespace std;
 
+void input_arr (int *a,int n){
+    for(int i=0;i<n;i++){
+        a[i]= rand()%9+1;
+    }
+}
+void output_arr (int *a,int n){
+    for(int i=0;i<n;i++){
+        cout << a[i] << " ";
+    }
+    system("pause");
+}
+void nhapfile(int *a,int n){
+    ofstream ofs;
+    ofs.open("bai2.txt",ios::out);
+    if(ofs.is_open()){
+        for(int i=0;i<n;i++){
+            ofs << a[i] << endl;
+        }
+    } else {
+        cout <<"Khong mo duoc file!";
+    }
+    ofs.close();
+}
+
+void docfile(int *&a,int &n){
+    ifstream ifs;
+    ifs.open("bai2.txt",ios::in);
+    if(ifs.is_open()){
+        int tmp;
+        while(ifs >> tmp){
+            n++;
+        }
+        ifs.clear();
+        ifs.seekg(0);
+        a = new int[n];
+        for(int i=0;i<n;i++){
+            ifs >> a[i];
+        }
+    } else {
+        cout <<"Khong mo duoc file!" ;
+    }
+    ifs.close();
+}
 void menu(){
     cout << "1. Ghi cac phan tu cua mang 1 chieu xuong file\n"
         <<"2. Doc cac gia tri so nguyen luu vao mang 1 chieu tu file \n"
         <<"3. Nhap cac phan tu so nguyen cho mang 1 chieu tu ban phim \n"
         <<"4. Xuat cac gia tri len man hinh \n";
 }
-void input(int *a,int &n){
-    cout << "Nhap so gia tri cua mang : " ; cin >> n;
-    for(int i=0;i<n;i++){
-            a[i] = rand()%9+1;
-        
-    }
-}
-void output(int **a,int n){
-    for(int i=0;i<n;i++){
-        cout << a[i] << " ";
-    }
-}
-
-void ghifile(int *a,int n){
-    ofstream ofs;
-    ofs.open("bai2.txt", ios::out);
-    if (ofs.is_open()){
-        for(int i=0;i<n;i++){
-            ofs << a[i] << endl;
-        }
-        ofs.close();
-    } else{
-        cout <<"Khong mo duoc file!" << endl;
-    }
-    ofs.close();
-}
-
-void docsonguyen(int *a,int n){
-    ifstream ifs;
-    ifs.open("bai2.txt",ios::in);
-    string line;
-    if(ifs.is_open()){
-        while(!ifs.eof()){
-            getline(ifs,line);
-            cout << line << " ";
-        }
-    }else {
-        cout <<"Khong mo duoc file!";
-    } 
-    cout << endl;
-    system("pause");
-    ifs.close();
-}
-
 int main(){
     srand(time(NULL));
-    int *a = new int [100];
-    int n;
+    int *a, n;
     int choice;
+    // menu();
     do{
         system("cls");
         menu();
-        cout << "NHAP CHUONG TRINH; ";
+        cout <<"CHON CHUONG TRINH : ";  
         cin >> choice;
-        
-
         switch (choice)
         {
         case 1:
-            input(a,n);
-            ghifile(a,n);
+            nhapfile(a,n);
             break;
         case 2:
-            docsonguyen(a,n);
+            docfile(a,n);
+            // output_arr(a,n);
+            break;
+        case 3:
+            cout <<"Nhap so luong phan tu : "; cin >> n;
+            a = new int[n];
+            input_arr(a,n);
+            // output_arr(a,n);
+            // nhapfile(a,n);
+            break;
+        case 4:
+            output_arr(a,n);
             break;
         default:
             break;
         }
+    
     } while(choice !=0);
-
-    // input(a,n); 
-    // ghifile(a,n);
-    // docsonguyen(a,n);
-
+    // docfile(a,n);
+    // output_arr(a,n);
     return 0;
 }
