@@ -32,6 +32,7 @@ void nhapfile(int *a,int n){
 void docfile(int *&a,int &n){
     ifstream ifs;
     ifs.open("bai2.txt",ios::in);
+    n=0;
     if(ifs.is_open()){
         int tmp;
         while(ifs >> tmp){
@@ -60,10 +61,18 @@ int main(){
     int choice;
     // menu();
     do{
-        system("cls");
-        menu();
-        cout <<"CHON CHUONG TRINH : ";  
-        cin >> choice;
+        do{
+            system("cls");
+            menu();
+            cout <<"CHON CHUONG TRINH : ";  
+            cin >> choice;
+            if(choice !=1 && choice!=2 &&choice!=3 &&choice!=4&&choice !=0){
+                cout <<"Chuong trinh khong hop le, vui long nhap lai! \n";
+                system("pause");
+            }
+        } while(choice !=1 && choice!=2 &&choice!=3 &&choice!=4&&choice!=0);
+
+
         switch (choice)
         {
         case 1:
