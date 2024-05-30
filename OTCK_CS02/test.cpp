@@ -68,8 +68,19 @@ void docfiledssv (DSSV &ds){
     ifstream ifs;
     ifs.open("test.txt",ios::in);
     if(ifs.is_open()){
-        ifs >> ds.soluong;
-        ifs.ignore();
+        // ifs >> ds.soluong;
+        // ifs.ignore();
+
+        ////duyet tim so luong
+        int n=0;
+        string line;
+        while(getline(ifs,line)){
+            n++;
+        }
+        ds.soluong = n;
+        ifs.clear();
+        ifs.seekg(0);
+        // cout <<ds.soluong;
         ds.sinhvien = new SinhVien [ds.soluong];
         for(int i=0;i<ds.soluong;i++){
             ifs >> ds.sinhvien[i].MSSV; ifs.ignore();
@@ -163,7 +174,7 @@ int main(){
     // ghifiledssv(ds);
     // xuatdssv(ds);
     docfiledssv(ds);
-    // xuatdssv(ds);
+    xuatdssv(ds);
     // cout << "So luong sinh vien thuoc lop CS20 la : " << demtheomalop(ds);
     // cout <<"So luong sinh vien co diem trung binh tren 8 la: " << demdiemtb(ds);
     // sapxep(ds);
@@ -171,8 +182,8 @@ int main(){
     // xoasv(ds);
     // xuatdssv(ds);
     // ghifiledssv(ds);
-    themsv(ds,sv);
-    ghifiledssv(ds);
+    // themsv(ds,sv);
+    // ghifiledssv(ds);
     // cout << ds.soluong;
     return 0;
 }
